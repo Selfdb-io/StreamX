@@ -2,6 +2,7 @@
 
 A self-hosted media streaming PWA for your personal music and video collection. Stream anywhere, on any device.
 
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
 ![PWA](https://img.shields.io/badge/PWA-installable-green.svg)
@@ -9,6 +10,16 @@ A self-hosted media streaming PWA for your personal music and video collection. 
 ## Overview
 
 StreamX is a modern, Spotify/Netflix-inspired media player that lets you stream your personal audio and video files from your own server. Built as a Progressive Web App (PWA), it works seamlessly on desktop and mobile devices with offline caching, lock screen controls, and native app-like experience.
+
+### Screenshots
+
+| Desktop | Mobile |
+|---------|--------|
+| ![Desktop](media/Desktop.png) | ![Mobile](media/mobile.png) |
+
+### Demo
+
+![Demo](media/Demo.mov)
 
 ## Features
 
