@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+/* === THEME CONFIGURATION === */
+/* Define all colors as CSS custom properties for Tailwind v4 */
+@theme {
+  /* Background colors */
+  --color-background: #faf7f5;
+  --color-background-alt: #f7f4f2;
+
+  /* Foreground/Text colors */
+  --color-foreground: #1a1a1a;
+  --color-foreground-muted: #6b6560;
+  --color-foreground-subtle: #9c9690;
+  --color-foreground-inverted: #ffffff;
+
+  /* Accent - Orange */
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-accent-light: #fb923c;
+  --color-accent-lighter: #fed7aa;
+  --color-accent-subtle: rgba(249, 115, 22, 0.12);
+  --color-accent-glow: rgba(249, 115, 22, 0.35);
+
+  /* Secondary - Gold */
+  --color-secondary: #fbbf24;
+  --color-secondary-hover: #f59e0b;
+  --color-secondary-subtle: rgba(251, 191, 36, 0.12);
+
+  /* Surface colors */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f9f7f5;
+  --color-surface-elevated: #ffffff;
+  --color-surface-glass: rgba(255, 255, 255, 0.75);
+
+  /* Border colors */
+  --color-border: #e8e4e0;
+  --color-border-muted: #f0ece8;
+  --color-border-accent: rgba(249, 115, 22, 0.25);
+
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-warning: #fbbf24;
+  --color-error: #ef4444;
+  --color-info: #f97316;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(249, 115, 22, 0.25);
+  --shadow-glow-lg: 0 0 40px rgba(249, 115, 22, 0.3);
+  --shadow-accent: 0 4px 16px rgba(249, 115, 22, 0.25);
+  --shadow-accent-lg: 0 8px 24px rgba(249, 115, 22, 0.3);
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+
+  /* Border radius */
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* Animations */
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-fade-in-up: fadeInUp 0.5s ease-out;
+  --animate-slide-up: slideUp 0.3s ease-out;
+  --animate-pulse-glow: pulseGlow 2s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 16px rgba(249, 115, 22, 0.25); }
+    50% { box-shadow: 0 0 28px rgba(249, 115, 22, 0.4); }
+  }
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+}
+
+/* Safe area utilities for notched devices (iPhone X, etc.) */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  
+  /* Combined safe area with minimum padding */
+  .safe-area-top-min {
+    padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+  }
+  
+  .safe-area-bottom-min {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient text - uses accent orange */
+.gradient-text {
+  @apply bg-gradient-to-br from-accent to-accent-hover bg-clip-text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mesh gradient background - warm orange glow */
+.mesh-gradient {
+  @apply bg-background;
+  background-image: 
+    radial-gradient(at 0% 0%, var(--color-accent-subtle) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, var(--color-secondary-subtle) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, var(--color-accent-subtle) 0px, transparent 50%);
+}
+
+/* Glass morphism - frosted white */
+.glass {
+  @apply bg-surface-glass backdrop-blur-lg border border-border-muted shadow-soft;
+}
+
+.glass-heavy {
+  @apply bg-surface backdrop-blur-xl border border-border shadow-card;
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply bg-surface-glass backdrop-blur-xs border border-border-muted rounded-2xl transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply scale-[1.02] bg-surface shadow-card-hover border-border-accent;
+}
+
+/* Elevated shadow */
+.elevated {
+  @apply shadow-elevated;
+}
+
+/* Glow effects */
+.glow-accent {
+  @apply shadow-glow;
+}
+
+.glow-accent-lg {
+  @apply shadow-glow-lg;
+}
+
+/* Glow pulse animation */
+.glow-pulse {
+  @apply animate-pulse-glow;
+}
+
+/* Spin animation */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Fade in up animation */
+.animate-fade-in-up {
+  @apply animate-fade-in-up;
+}
+
+/* Progress bar */
+.progress-track {
+  @apply h-1.5 bg-border rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-gradient-to-r from-accent to-accent-light rounded-full shadow-glow;
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-accent to-accent-hover text-foreground-inverted px-6 py-3 rounded-xl font-semibold shadow-accent transition-all duration-200 hover:scale-105 hover:shadow-accent-lg active:scale-95;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-foreground-muted px-4 py-2 rounded-xl border border-transparent transition-all duration-200 hover:bg-accent-subtle hover:text-foreground hover:border-border;
+}
+
+.btn-icon {
+  @apply w-10 h-10 flex items-center justify-center rounded-xl bg-accent-subtle border border-border-muted text-foreground-muted transition-all duration-200 hover:bg-accent-lighter hover:text-foreground hover:border-border;
+}
+
+/* Input styles */
+.input {
+  @apply bg-surface border border-border rounded-2xl px-5 py-3 text-foreground text-sm transition-all duration-200 placeholder:text-foreground-subtle focus:outline-none focus:border-accent focus:ring-4 focus:ring-accent-subtle;
+}
+
+/* Slider track */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply h-1.5 bg-border rounded-full;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  @apply w-3.5 h-3.5 bg-accent rounded-full -mt-1 shadow-glow transition-transform;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-track {
+  @apply h-1.5 bg-border rounded-full;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-3.5 h-3.5 bg-accent rounded-full border-none shadow-glow;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .mobile-player {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Video player fullscreen */
+.video-player-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: black;
+}
+
+.video-player-fullscreen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Continue watching progress bar */
+.watch-progress {
+  @apply absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-accent to-accent-light rounded-b-xl transition-all duration-300;
+}
+
+/* Queue item */
+.queue-item {
+  @apply flex items-center gap-3 p-3 rounded-xl transition-all duration-200 hover:bg-accent-subtle;
+}
+
+.queue-item.active {
+  @apply bg-accent-subtle border border-border-accent;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  @apply absolute bottom-full left-1/2 -translate-x-1/2 px-3 py-2 bg-foreground text-foreground-inverted text-xs rounded-lg whitespace-nowrap opacity-0 pointer-events-none transition-opacity duration-200;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+

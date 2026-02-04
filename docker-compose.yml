@@ -1,0 +1,13 @@
+services:
+  streamx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: streamx
+    ports:
+      - "7034:7034"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
