@@ -19,7 +19,7 @@ StreamX is a modern, Spotify/Netflix-inspired media player that lets you stream 
 
 ### Demo
 
-![Demo](media/Demo.mov)
+[**▶️ Watch Demo Video**](https://github.com/Selfdb-io/StreamX/blob/main/media/Demo.mov)
 
 ## Features
 
